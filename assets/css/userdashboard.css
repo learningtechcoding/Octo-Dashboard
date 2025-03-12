@@ -1,0 +1,127 @@
+/*#################> Login Page Start <################*/
+.lightdarksetting{
+    position: absolute; right: 20px; top: 20px;
+}
+
+.shade img{
+    width: 250px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+}
+.btn-cstm{
+    height: 50px;
+    border-radius: 20px;
+    
+}
+.btn-cstmout{
+    height: 50px;
+    border-radius: 10px;
+}
+.logincreate{
+    color: #555;
+    font-size: 16px;
+    font-weight: 500;
+}
+.welcomeloginhead h4{
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: 0.64px;
+
+}
+.welcomeloginhead p{
+    font-size: 16px;
+    font-weight: 500;
+    color: #1E1E1E;
+
+}
+.forgerlo a{
+    color: #555;
+    font-size: 16px;
+    font-weight: 500;
+}
+[data-bs-theme=dark]  .welcomeloginhead p{
+    font-size: 16px;
+    font-weight: 500;
+    color: #F0F0F0;
+
+}
+
+
+.app-brand-link {
+    color: #1E1E1E;
+}
+
+.app-brand-text.demo {
+    font-size: 1.75rem;
+    letter-spacing: -0.5px;
+}
+
+
+.opttext{
+    border: 1px solid #957AF7;
+    border-radius: 10px;
+}
+.opttext input{
+    border-color: #555;
+    opacity: 0.6;
+}
+
+.otptextmainm h4{
+    font-size: 24px;
+    font-weight: 700;
+
+}
+
+.otptextmainmq h4{
+    color: #555;
+    opacity: 0.9;
+}
+
+[data-bs-theme=dark]  .btn-cstmout{
+    border-color:#957AF7 ;
+    color: #F0F0F0;
+    background-color: #393D5E;
+
+}
+[data-bs-theme=dark]  .opttext input{
+   
+    background-color: #393D5E;
+
+}
+
+[data-bs-theme="dark"] .firstotp {
+    background-color: #393D5E;
+    border-top-left-radius: 12px !important;
+    border-bottom-left-radius: 12px !important;
+}
+[data-bs-theme="dark"] .lasttotp {
+    background-color: #393D5E;
+    border-top-right-radius: 12px !important;
+    border-bottom-right-radius: 12px !important;
+}
+ 
+[data-bs-theme=dark]  .otptextmainmq h4{
+    color: #F0F0F0;
+    opacity: 0.9;
+}
+
+
+[data-bs-theme=dark] .forgerlo a{
+    color: #F0F0F0;
+    font-size: 16px;
+    font-weight: 500;
+}
+[data-bs-theme=dark] .logincreate span{
+    color: rgba(255, 255, 255, 0.80);
+    
+}
+[data-bs-theme=dark] .logincreate  a span{
+    color: #957AF7 !important;
+    
+}
+[data-bs-theme=dark] .app-brand-link {
+    color: #F0F0F0;
+}
+
+/*#################> Login Page  End <################*/
