@@ -124,4 +124,11 @@
     color: #F0F0F0;
 }
 
+
+@media(max-width:992px)
+{
+    .shade img{
+         display: none !important;
+    }
+}
 /*#################> Login Page  End <################*/
