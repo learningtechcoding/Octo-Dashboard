@@ -132,3 +132,172 @@
     }
 }
 /*#################> Login Page  End <################*/
+
+
+/*#################> Header Setting Start <#############*/
+.headerchartap{
+    position: relative;
+}
+.headerchartap svg{
+    position: absolute !important;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.progressheader .progress-bar {
+    background-color:  #BF00FF !important;
+    box-shadow: 0 2px 4px 0 var(--bs-progress-bar-shadow-color);
+    color: var(--bs-white)
+}
+
+.progressheader, .progress-stacked
+{
+    background-color: rgba(255, 255, 255, 0.10) !important;
+}
+.progreval p{
+    color: #fff;
+    font-size: 12px;
+    font-weight: 400;
+
+}
+
+
+.cardshafe img{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 200px;
+    height: 100%;
+}
+
+
+.maincard h3{
+    text-shadow: 81px 190px 58px rgba(0, 255, 255, 0.00), 52px 122px 53px rgba(0, 255, 255, 0.01), 29px 68px 45px rgba(0, 255, 255, 0.05), 13px 30px 33px rgba(0, 255, 255, 0.09), 3px 8px 18px rgba(0, 255, 255, 0.10);
+font-size: 30px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+letter-spacing: 0.72px;
+
+}
+
+.maindashheading h3{
+    color: #1E1E1E;
+text-shadow: 81px 190px 58px rgba(0, 255, 255, 0.00), 52px 122px 53px rgba(0, 255, 255, 0.01), 29px 68px 45px rgba(0, 255, 255, 0.05), 13px 30px 33px rgba(0, 255, 255, 0.09), 3px 8px 18px rgba(0, 255, 255, 0.10);
+font-family: Manrope;
+font-size: 26px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+letter-spacing: 0.52px;
+
+}
+.maindashheading p{
+    color:#1E1E1E;
+    font-family: Manrope;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
+}
+.dashboardcard .card-title1{
+    position: absolute;
+    text-align: center;
+    top: 30px;
+    left: 0%;
+    right: 0%;
+    /* transform: translate(-20%,-50%); */
+
+    color: #1E1E1E;
+font-family: Manrope;
+font-size: 24px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+
+}
+.cardprogress .text-body{
+color: #1E1E1E;
+font-family: Manrope;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+[data-bs-theme=dark] .cardprogress .text-body{
+    color: #F0F0F0;
+}
+.cardprogress .progress{
+    height: 12px !important;
+}
+.cardprogress .progress .progress-bar{
+    background-color: #957AF7;
+ 
+}
+
+@media(max-width:992px)
+{
+
+    .maincard h3{
+        text-shadow: 81px 190px 58px rgba(0, 255, 255, 0.00), 52px 122px 53px rgba(0, 255, 255, 0.01), 29px 68px 45px rgba(0, 255, 255, 0.05), 13px 30px 33px rgba(0, 255, 255, 0.09), 3px 8px 18px rgba(0, 255, 255, 0.10);
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 0.72px;
+    
+    }
+    nav.layout-navbar .navbar.landing-navbar .navbar-nav .nav-link.active{
+        color: #1E1E1E !important;
+    }
+}
+@media(max-width:554px)
+{
+    .app-brand-text.demo {
+        font-size: 1rem
+    }
+}
+@media(max-width:554px)
+{
+    .app-brand-text.demo {
+        font-size: 1rem
+    }
+}
+
+.darklightmode h5{
+     color: #555;
+
+}
+
+
+[data-bs-theme=dark]  .dashboardcard .card-title1{
+ 
+
+    color: #F0F0F0;
+ 
+
+}
+
+[data-bs-theme=dark]  .darklightmode h5{
+    color: #fff;
+
+}
+
+[data-bs-theme=dark]  .darklightmode svg path{
+    fill: #957AF7 !important;
+
+}
+[data-bs-theme=dark]    h3{
+    color: #F0F0F0;
+ 
+
+}
+[data-bs-theme=dark]    p{
+    color: #F0F0F0;
+    opacity: 0.6;
+ 
+
+}
+
+/*#################> Header Setting  End  <#############*/
