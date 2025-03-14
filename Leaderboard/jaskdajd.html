@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard - Top Learners</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+       
+   
+        .leaderboard-container {
+            max-width: 900px;
+            margin: 20px auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .leaderboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: white;
+        }
+
+        .leaderboard-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+            color: #333;
+        }
+
+        .filter-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .filter-dropdown {
+            position: relative;
+        }
+
+        .filter-dropdown select {
+            appearance: none;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 8px 30px 8px 12px;
+            font-size: 14px;
+            cursor: pointer;
+            min-width: 120px;
+        }
+
+        .filter-dropdown::after {
+            content: "";
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #666;
+            pointer-events: none;
+        }
+
+        .table-container {
+            background-color: white;
+            border-radius: 0 0 12px 12px;
+            overflow: hidden;
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-bottom: 0;
+            table-layout: fixed; /* Added for equal width columns */
+        }
+
+        .leaderboard-table th {
+            background-color: #8B5CF6;
+            color: white;
+            font-weight: 500;
+            text-align: left;
+            padding: 15px 20px;
+            border: none;
+        }
+
+        .leaderboard-table td {
+            padding: 12px 20px;
+            border-top: 1px solid #f0f0f0;
+            vertical-align: middle;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Column widths */
+        .leaderboard-table th:nth-child(1),
+        .leaderboard-table td:nth-child(1) {
+            width: 15%;
+        }
+
+        .leaderboard-table th:nth-child(2),
+        .leaderboard-table td:nth-child(2) {
+            width: 15%;
+        }
+
+        .leaderboard-table th:nth-child(3),
+        .leaderboard-table td:nth-child(3) {
+            width: 40%;
+        }
+
+        .leaderboard-table th:nth-child(4),
+        .leaderboard-table td:nth-child(4) {
+            width: 15%;
+            text-align: center;
+        }
+
+        .leaderboard-table th:nth-child(5),
+        .leaderboard-table td:nth-child(5) {
+            width: 15%;
+            text-align: right;
+        }
+
+        .rank-cell {
+            font-weight: 600;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .name-cell {
+            font-weight: 500;
+        }
+
+        .xp-cell {
+            color: #8B5CF6;
+            font-weight: 600;
+        }
+
+        .rank-1 {
+            color: #22C55E;
+        }
+
+        .rank-2 {
+            color: #EC4899;
+        }
+
+        .rank-3 {
+            color: #8B5CF6;
+        }
+
+        .your-rank-row {
+            background-color: #EEF2FF;
+        }
+
+        .your-rank-header {
+            background-color: #8B5CF6;
+            color: white;
+            padding: 10px 20px;
+            font-weight: 500;
+        }
+
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            padding: 15px;
+            background-color: white;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .pagination {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .pagination li {
+            margin: 0 5px;
+        }
+
+        .pagination a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .pagination a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .pagination .active a {
+            background-color: #8B5CF6;
+            color: white;
+        }
+
+        .pagination .disabled a {
+            color: #ccc;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .leaderboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .filter-container {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .leaderboard-table {
+                table-layout: auto; /* Allow responsive behavior on mobile */
+            }
+
+            .leaderboard-table th:nth-child(4),
+            .leaderboard-table td:nth-child(4),
+            .leaderboard-table th:nth-child(5),
+            .leaderboard-table td:nth-child(5) {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="leaderboard-container">
+        <div class="leaderboard-header">
+            <h1 class="leaderboard-title">Leaderboard - Top Learners</h1>
+            <div class="filter-container">
+                <div class="filter-dropdown">
+                    <select id="usersFilter">
+                        <option value="global">Global</option>
+                        <option value="local">Local</option>
+                        <option value="friends">Friends</option>
+                    </select>
+                </div>
+                <div class="filter-dropdown">
+                    <select id="rankingFilter">
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="alltime">All Time</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Avatar</th>
+                        <th>Name</th>
+                        <th>Level</th>
+                        <th>XP</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboardBody">
+                    <!-- Table rows will be inserted here by JavaScript -->
+                </tbody>
+            </table>
+
+            <div class="your-rank-header">Your Rank</div>
+            <table class="leaderboard-table">
+                <tbody id="yourRankBody">
+                    <!-- Your rank will be inserted here by JavaScript -->
+                </tbody>
+            </table>
+
+            <div class="pagination-container">
+                <ul class="pagination" id="pagination">
+                    <!-- Pagination will be inserted here by JavaScript -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data - in a real app, this would come from an API
+        const allLeaderboardData = [
+            { rank: 1, name: 'Asim Khattak', level: 12, xp: 2582, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 2, name: 'Shazain', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 3, name: 'Salman Farooq', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 4, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 5, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 6, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 7, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 8, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 9, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 10, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 11, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 12, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 13, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 14, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 15, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 16, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 17, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 18, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 19, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 20, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 21, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 22, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 23, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 24, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 25, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 26, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 27, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 28, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 29, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+            { rank: 30, name: 'Javid Afridi', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' },
+        ];
+
+        // Your rank data
+        const yourRank = { rank: 122, name: 'Asim Khattak', level: 12, xp: 2500, avatar: '/placeholder.svg?height=40&width=40' };
+
+        // Pagination settings
+        const itemsPerPage = 10;
+        let currentPage = 1;
+        const totalPages = Math.ceil(allLeaderboardData.length / itemsPerPage);
+
+        // Helper functions
+        function getRankClass(rank) {
+            if (rank === 1) return 'rank-1';
+            if (rank === 2) return 'rank-2';
+            if (rank === 3) return 'rank-3';
+            return '';
+        }
+
+        function formatXP(xp) {
+            return `${xp.toLocaleString()} XP`;
+        }
+
+        function getPaginatedData() {
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            return allLeaderboardData.slice(startIndex, endIndex);
+        }
+
+        // Render functions
+        function renderLeaderboard() {
+            const tbody = document.getElementById('leaderboardBody');
+            tbody.innerHTML = '';
+
+            const paginatedData = getPaginatedData();
+            
+            paginatedData.forEach(entry => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="rank-cell ${getRankClass(entry.rank)}">#${entry.rank}</td>
+                    <td><img src="${entry.avatar}" alt="${entry.name}" class="avatar"></td>
+                    <td class="name-cell">${entry.name}</td>
+                    <td>${entry.level}</td>
+                    <td class="xp-cell">${formatXP(entry.xp)}</td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            renderYourRank();
+            renderPagination();
+        }
+
+        function renderYourRank() {
+            const tbody = document.getElementById('yourRankBody');
+            tbody.innerHTML = '';
+
+            const row = document.createElement('tr');
+            row.classList.add('your-rank-row');
+            row.innerHTML = `
+                <td class="rank-cell">#${yourRank.rank}</td>
+                <td><img src="${yourRank.avatar}" alt="${yourRank.name}" class="avatar"></td>
+                <td class="name-cell">${yourRank.name}</td>
+                <td>${yourRank.level}</td>
+                <td class="xp-cell">${formatXP(yourRank.xp)}</td>
+            `;
+            tbody.appendChild(row);
+        }
+
+        function renderPagination() {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+
+            // Previous button
+            const prevLi = document.createElement('li');
+            prevLi.classList.add(currentPage === 1 ? 'disabled' : '');
+            prevLi.innerHTML = `<a href="#" aria-label="Previous">&laquo;</a>`;
+            if (currentPage > 1) {
+                prevLi.querySelector('a').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentPage--;
+                    renderLeaderboard();
+                });
+            }
+            pagination.appendChild(prevLi);
+
+            // Page numbers
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+            if (endPage - startPage + 1 < maxVisiblePages && totalPages > maxVisiblePages) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+
+            for (let i = startPage; i <= endPage; i++) {
+                const pageLi = document.createElement('li');
+                pageLi.classList.add(i === currentPage ? 'active' : '');
+                pageLi.innerHTML = `<a href="#">${i}</a>`;
+                pageLi.querySelector('a').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentPage = i;
+                    renderLeaderboard();
+                });
+                pagination.appendChild(pageLi);
+            }
+
+            // Next button
+            const nextLi = document.createElement('li');
+            nextLi.classList.add(currentPage === totalPages ? 'disabled' : '');
+            nextLi.innerHTML = `<a href="#" aria-label="Next">&raquo;</a>`;
+            if (currentPage < totalPages) {
+                nextLi.querySelector('a').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentPage++;
+                    renderLeaderboard();
+                });
+            }
+            pagination.appendChild(nextLi);
+        }
+
+        // Filter change handlers
+        document.getElementById('usersFilter').addEventListener('change', () => {
+            // In a real app, this would fetch new data based on the filter
+            currentPage = 1;
+            renderLeaderboard();
+        });
+
+        document.getElementById('rankingFilter').addEventListener('change', () => {
+            // In a real app, this would fetch new data based on the filter
+            currentPage = 1;
+            renderLeaderboard();
+        });
+
+        // Initial render
+        renderLeaderboard();
+    </script>
+</body>
+</html>

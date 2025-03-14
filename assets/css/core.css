@@ -2986,8 +2986,14 @@
  }
  
  .form-label {
-     margin-bottom: .25rem;
-     font-size: 0.8125rem;
+
+   
+font-family: Manrope;
+font-size: 15px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+   
      color: var(--bs-heading-color)
  }
  
@@ -3209,7 +3215,7 @@
      background-repeat: no-repeat;
      background-position: right .9375rem center;
      background-size: 22px 24px;
-     border: var(--bs-border-width) solid color-mix(in sRGB, var(--bs-base-color) 22%, var(--bs-paper-bg));
+     border: var(--bs-border-width) solid color-mix(in sRGB, var(--bs-base-color) 100%, var(--bs-paper-bg));
      border-radius: var(--bs-border-radius);
      transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out
  }
@@ -9978,14 +9984,25 @@
  }
  
  .form-select {
-     --bs-form-select-border-color: color-mix(in sRGB, var(--bs-base-color) 22%, var(--bs-paper-bg));
+     --bs-form-select-border-color: color-mix(in sRGB, var(--bs-base-color) 100%, var(--bs-paper-bg));
      border-color: var(--bs-form-select-border-color);
      background-clip: padding-box;
      padding-block: calc(.543rem - var(--bs-border-width));
      padding-inline-end: calc(2.625rem - var(--bs-border-width));
      padding-inline-start: calc(.9375rem - var(--bs-border-width))
  }
- 
+ [data-bs-theme=dark]
+    .form-select12 select{
+background-color: #393D5E !important;
+ }
+    .form-select12 select{
+      
+        font-family: Manrope;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+ }
  .form-select optgroup,
  .form-select option {
      background-color: var(--bs-paper-bg)
@@ -10066,7 +10083,7 @@
  }
  
  [data-bs-theme=dark] .form-select {
-     --bs-form-select-border-color: color-mix(in srgb, #e6e6f1 22%, #393a5a)
+     --bs-form-select-border-color: color-mix(in srgb, #957AF7 100%, #957AF7)
  }
  
  [data-bs-theme=dark] .form-select:disabled {
